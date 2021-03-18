@@ -22,9 +22,7 @@ namespace SemaphoreUsage
 
         private static IEnumerable<Task> CreateCalls()
         {
-            // when number of calling service is too high, network breaks the calling execution
-            // (tasks are canceled)
-            // and throws the error
+            // all requests will be received successfully by the end service
             for (int i = 0; i < 500; i++)
             {
                 yield return CallGoogle();
