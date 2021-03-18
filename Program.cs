@@ -13,7 +13,7 @@ namespace SemaphoreUsage
         {
             Timeout = TimeSpan.FromSeconds(5)
         };
-        private static readonly SemaphoreSlim _gate = new SemaphoreSlim(1);
+        private static readonly SemaphoreSlim _gate = new SemaphoreSlim(30);
 
         private static void Main(string[] args)
         {
@@ -35,7 +35,9 @@ namespace SemaphoreUsage
         {
             try
             {
-                var response = await _client.GetAsync("https://google.com");
+                await _gate.WaitAsync();
+                var response = await _client.GetAsync("https://hackerrank.com");
+                _gate.Release();
                 Console.WriteLine(response.StatusCode);
             }
             catch (Exception e)
