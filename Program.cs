@@ -33,8 +33,16 @@ namespace SemaphoreUsage
 
         private static async Task CallGoogle()
         {
-            var response = await _client.GetAsync("https://google.com");
-            Console.WriteLine(response.StatusCode);
+            try
+            {
+                var response = await _client.GetAsync("https://google.com");
+                Console.WriteLine(response.StatusCode);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }
